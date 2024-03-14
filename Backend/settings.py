@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from datetime import timedelta
+from decouple import config
 
 
 
@@ -25,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -104,9 +105,9 @@ ASGI_APPLICATION = 'Backend.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get("NAME"),
-        'USER': os.environ.get("USER"),
-        'PASSWORD': os.environ.get("PASSWORD"),
+        'NAME': config("NAME"),
+        'USER': config("USER"),
+        'PASSWORD': config("PASSWORD"),
         'HOST': 'localhost',
         'PORT': '5432',  # Specify the port number here
     }
@@ -244,8 +245,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Razorpay API
 
 
-RAZORPAY_KEY_ID = os.environ.get("RAZORPAY_KEY_ID")
-RAZORPAY_KEY_SECRET = os.environ.get("RAZORPAY_KEY_SECRET")
+RAZORPAY_KEY_ID = config("RAZORPAY_KEY_ID")
+RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET")
 
 
 # Celery
