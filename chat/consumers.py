@@ -1,11 +1,14 @@
-import json
 
+import django
+django.setup()
+import json
+from account.models import Doctor, Patient
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
 from django.utils.timesince import timesince
 
-
-
+from .models import ChatMessage
+from booking.models import Transaction
 from django.contrib.auth import get_user_model
 from channels.db import database_sync_to_async
 
@@ -15,10 +18,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
     appointment=None
 
     async def connect(self):
-        from .models import ChatMessage
-        from booking.models import Transaction
-        from account.models import Doctor, Patient
-
         print("checking the connection")
         self.transaction_id = self.scope['url_route']['kwargs']['appointment_id']
         self.appointment = await self.get_appointment_instance(self.transaction_id)
