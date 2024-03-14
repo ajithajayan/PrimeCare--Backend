@@ -160,7 +160,7 @@ USE_TZ = True
 # email authentication
 
 
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # Use TLS for secure communication
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
