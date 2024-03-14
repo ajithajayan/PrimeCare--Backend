@@ -160,11 +160,11 @@ USE_TZ = True
 # email authentication
 
 
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = config("EMAIL_HOST")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True  # Use TLS for secure communication
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_DEBUG = True
 
 
