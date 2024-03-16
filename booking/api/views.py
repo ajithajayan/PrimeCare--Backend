@@ -719,6 +719,7 @@ class DoctorLeaveUpdateAPIView(APIView):
 
 
 class AdminDashboardDataAPIView(APIView):
+    permission_classes=[IsAdminUser]
     def get(self, request, *args, **kwargs):
         total_patients = Patient.objects.count()
         total_doctors = Doctor.objects.count()
