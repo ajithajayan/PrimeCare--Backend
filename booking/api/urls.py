@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import  AdvancedSlotUpdateView, DoctorBookingDetailsAPIView, DoctorSlotBulkUpdateView, DoctorSlotUpdateView,DoctorSlotsAPIView,DoctorSlotDeleteView,DocDetailList, DoctorTransactionsAPIView,DoctorsUserSideList, PatientBookingDetailsAPIView, PatientDetailList, PatientSlotsCheckingAPIView, PatientTransactionsAPIView, PayUsingWalletAPIview,RazorpayOrderAPIView, TrasactionListAPIView, TrasactionRetriveAPIView, cancel_booking, cancel_booking_doctor,check_availability,TransactionAPIView,DoctorLeaveUpdateAPIView    
+from .views import  AdminDashboardDataAPIView, AdvancedSlotUpdateView, DoctorBookingDetailsAPIView, DoctorSlotBulkUpdateView, DoctorSlotUpdateView,DoctorSlotsAPIView,DoctorSlotDeleteView,DocDetailList, DoctorTransactionsAPIView,DoctorsUserSideList, PatientBookingDetailsAPIView, PatientDetailList, PatientSlotsCheckingAPIView, PatientTransactionsAPIView, PayUsingWalletAPIview,RazorpayOrderAPIView, TrasactionListAPIView, TrasactionRetriveAPIView, cancel_booking, cancel_booking_doctor,check_availability,TransactionAPIView,DoctorLeaveUpdateAPIView    
 
 urlpatterns = [
     path('doctors/<str:custom_id>/slots/', DoctorSlotsAPIView.as_view(), name='doctor-slots-api'),
@@ -74,6 +74,10 @@ urlpatterns = [
     # for getting the boking details with doctor profile and name
 
     path('api/patient-transactions/', PatientTransactionsAPIView.as_view(), name='patient-transactions'),
+
+    # for getting the details in the admin dashboard
+
+    path('api/admin-transactions/', AdminDashboardDataAPIView.as_view(), name='admin-transactions'),
 
 
 ]

@@ -649,6 +649,7 @@ class PatientTransactionsAPIView(APIView):
     
 
 from datetime import datetime
+from django.db.models import Sum
 
 class DoctorLeaveUpdateAPIView(APIView):
     def post(self, request, *args, **kwargs):
@@ -708,3 +709,28 @@ class DoctorLeaveUpdateAPIView(APIView):
             return JsonResponse({"error": "Doctor not found"}, status=status.HTTP_404_NOT_FOUND)
 
         return JsonResponse({"message": "Leave applied successfully"}, status=status.HTTP_200_OK)
+    
+
+
+
+
+# admin side dashboard data
+
+
+
+class AdminDashboardDataAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        total_patients = Patient.objects.count()
+        total_doctors = Doctor.objects.count()
+        total_transactions = Transaction.objects.count()
+        total_revenue = Transaction.objects.aggregate(Sum('amount'))['amount__sum']
+        print('revenuee ',total_revenue)
+
+        response = {
+            'total_patients': total_patients,
+            'total_doctors': total_doctors,
+            'total_transactions': total_transactions,
+            'total_revenue': total_revenue
+        }
+
+        return JsonResponse(response, safe=False,status=status.HTTP_200_OK)
