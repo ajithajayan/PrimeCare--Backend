@@ -240,8 +240,10 @@ SIMPLE_JWT = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGIN = '*'
 
-CSRF_TRUSTED_ORIGINS = ['https://primecare.cloud']
+
+# CSRF_TRUSTED_ORIGINS = ['https://primecare.cloud']
 
 # Razorpay API
 
