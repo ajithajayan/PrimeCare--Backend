@@ -168,7 +168,7 @@ class UserLogin(APIView):
     
 
 class LogoutView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
@@ -245,6 +245,7 @@ class PatientUseDetailsUpdate(generics.ListAPIView):
 
 class DocDetailsUpdate(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
     serializer_class = UserDetailsUpdateSerializer
     lookup_field = 'pk'
@@ -252,25 +253,30 @@ class DocDetailsUpdate(generics.RetrieveUpdateAPIView):
 
 class AdminDocUpdate(generics.RetrieveUpdateAPIView):
     queryset = Doctor.objects.all()
+    permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
     serializer_class = AdminDocUpdateSerializer
+    permission_classes=[IsAuthenticated]
     lookup_field = 'pk'
 
 
 class AdminDocDelete(generics.RetrieveDestroyAPIView):
     queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = UserSerializer
     lookup_field = 'pk'
     
 
 class AdminClientUpdate(generics.RetrieveUpdateAPIView):
     queryset=Patient.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = AdminClientUpdateSerializer
     lookup_field = 'pk'
     
 
 class ClientDetailsUpdate(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
+    permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
     serializer_class = PatientUserSerializer
     lookup_field = 'pk'    
@@ -319,7 +325,7 @@ class AdminDoctorApprovalListView(generics.ListAPIView):
     queryset = User.objects.filter(
     Q(user_type='doctor') & ~Q(approval_status='APPROVED')  
 ) 
-
+    permission_classes = [IsAuthenticated]
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [IsAdminUser]
     serializer_class = UserDetailsUpdateSerializer
@@ -332,6 +338,7 @@ class AdminDoctorApprovalListView(generics.ListAPIView):
 # for to display the wallet amout of the user
     
 class WalletAmountView(generics.RetrieveUpdateAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Wallet.objects.all()
     serializer_class = WalletUpdateSerializer
     lookup_field = 'patient_id'

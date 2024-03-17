@@ -274,7 +274,7 @@ class RazorpayOrderAPIView(APIView):
 class TransactionAPIView(APIView):
     """This API will complete order and save the 
     transaction"""
-    
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         transaction_serializer = TranscationModelSerializer(data=request.data)
         if transaction_serializer.is_valid():
@@ -321,6 +321,7 @@ class TransactionAPIView(APIView):
         
 
 class PayUsingWalletAPIview(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         transaction_serializer = TranscationModelSerializer(data=request.data)
         
@@ -500,6 +501,7 @@ def cancel_booking_doctor(request):
 
 
 class TrasactionListAPIView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Transaction.objects.all()
     serializer_class = TranscationModelList
     pagination_class = PageNumberPagination    
@@ -509,6 +511,7 @@ class TrasactionListAPIView(generics.ListAPIView):
 
 
 class TrasactionRetriveAPIView(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
     queryset = Transaction.objects.all()
     serializer_class = TranscationModelList
     lookup_field = 'pk'
@@ -547,6 +550,7 @@ def DoctorBookingDetailsAPIView(request, doctor_id):
 from django.http import Http404
 
 class DoctorTransactionsAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, *args, **kwargs):
         doctor_id = request.query_params.get('doctor_id', None)
 
@@ -599,6 +603,7 @@ class DoctorTransactionsAPIView(APIView):
 
 
 class PatientTransactionsAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def get(self, request, *args, **kwargs):
         patient_id = request.query_params.get('patient_id', None)
 
@@ -652,6 +657,7 @@ from datetime import datetime
 from django.db.models import Sum
 
 class DoctorLeaveUpdateAPIView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         doctor_id = request.data.get('custom_id')
         from_date_str = request.data.get('fromDate')
